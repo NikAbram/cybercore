@@ -1,0 +1,13 @@
+.next
+node_modules
+coverage
+playwright-report
+test-results
+package-lock.json
+next-env.d.ts
+.agents
+AGENTS.md
+PLAN.md
+PROJECT_FOUNDATION.md
+TECHNICAL_SPEC.md
+skills-lock.json

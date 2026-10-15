@@ -1,0 +1,39 @@
+@import 'tailwindcss';
+
+:root {
+  color-scheme: dark;
+  --color-ink: #09090d;
+  --color-surface: #17171f;
+  --color-signal: #ef233c;
+  --color-text: #f5f5f7;
+  --color-muted: #9292a3;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  background: var(--color-ink);
+}
+
+body {
+  min-height: 100vh;
+  margin: 0;
+  background: var(--color-ink);
+  color: var(--color-text);
+  font-family: Arial, sans-serif;
+}
+
+main {
+  display: grid;
+  min-height: 100vh;
+  place-content: center;
+  gap: 1rem;
+  padding: 1.5rem;
+}
+
+h1,
+p {
+  margin: 0;
+}
