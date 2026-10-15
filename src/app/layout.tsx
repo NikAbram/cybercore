@@ -1,7 +1,20 @@
 import type { Metadata } from 'next'
+import { Inter, Space_Grotesk } from 'next/font/google'
 import type { ReactNode } from 'react'
 
 import './globals.css'
+
+const inter = Inter({
+  subsets: ['cyrillic', 'latin'],
+  variable: '--font-inter',
+  display: 'swap',
+})
+
+const spaceGrotesk = Space_Grotesk({
+  subsets: ['latin'],
+  variable: '--font-space-grotesk',
+  display: 'swap',
+})
 
 export const metadata: Metadata = {
   title: 'CYBERCORE',
@@ -13,7 +26,9 @@ export default function RootLayout({
 }: Readonly<{ children: ReactNode }>) {
   return (
     <html lang="ru">
-      <body>{children}</body>
+      <body className={`${inter.variable} ${spaceGrotesk.variable}`}>
+        {children}
+      </body>
     </html>
   )
 }

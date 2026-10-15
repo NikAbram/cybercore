@@ -1,0 +1,234 @@
+.hero {
+  position: relative;
+  display: grid;
+  min-height: calc(100svh - var(--header-height));
+  grid-template-columns: minmax(19rem, 0.82fr) minmax(0, 1.18fr);
+  align-items: stretch;
+  padding-inline: var(--page-gutter);
+}
+
+.copy {
+  z-index: 2;
+  display: flex;
+  max-width: 42rem;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  padding: clamp(4rem, 9vh, 7.5rem) clamp(2rem, 5vw, 5.5rem)
+    clamp(5.5rem, 11vh, 9rem) 0;
+  animation: hero-copy-in 700ms 160ms var(--ease-out) both;
+}
+
+.location {
+  margin: 0 0 clamp(2rem, 5vh, 4.5rem);
+  color: var(--color-muted);
+  font-size: var(--text-sm);
+}
+
+.title {
+  margin: 0;
+  font-size: var(--text-hero);
+  font-weight: 780;
+  letter-spacing: -0.068em;
+  line-height: 0.88;
+  text-wrap: balance;
+}
+
+.title span {
+  display: block;
+  white-space: nowrap;
+}
+
+.lead {
+  max-width: 35rem;
+  margin: clamp(2rem, 4vh, 3rem) 0 0;
+  color: var(--color-text-soft);
+  font-size: var(--text-lg);
+  line-height: 1.6;
+}
+
+.action {
+  display: inline-flex;
+  min-height: 3.25rem;
+  align-items: center;
+  justify-content: center;
+  margin-top: clamp(2rem, 5vh, 3.5rem);
+  border: 1px solid var(--color-signal);
+  padding: 0.875rem 1.25rem;
+  background: var(--color-signal);
+  color: white;
+  font-weight: 650;
+  text-decoration: none;
+  transition:
+    background-color 180ms ease,
+    border-color 180ms ease;
+}
+
+.action:hover {
+  border-color: var(--color-signal-active);
+  background: var(--color-signal-active);
+}
+
+.visual {
+  position: relative;
+  min-height: 38rem;
+  overflow: hidden;
+  background: var(--color-surface);
+  clip-path: inset(0 0 0 0);
+  animation: hero-image-in 900ms var(--ease-out) both;
+}
+
+.image {
+  object-fit: cover;
+  transition: transform 700ms var(--ease-out);
+}
+
+.visual:hover .image {
+  transform: scale(1.018);
+}
+
+.visualShade {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(90deg, rgb(9 9 13 / 48%) 0, transparent 24%),
+    linear-gradient(0deg, rgb(9 9 13 / 58%) 0, transparent 36%);
+}
+
+.frameNote {
+  position: absolute;
+  right: clamp(1rem, 2.4vw, 2.5rem);
+  bottom: clamp(1rem, 2.4vw, 2.5rem);
+  display: flex;
+  align-items: baseline;
+  gap: 0.45rem;
+  margin: 0;
+  color: var(--color-text);
+  font-size: var(--text-sm);
+}
+
+.frameNote span {
+  font-size: clamp(2rem, 4vw, 4.5rem);
+  font-weight: 600;
+  letter-spacing: -0.055em;
+  line-height: 0.8;
+}
+
+.route {
+  position: absolute;
+  z-index: 3;
+  right: var(--page-gutter);
+  bottom: clamp(2rem, 5vh, 4.25rem);
+  left: var(--page-gutter);
+  height: 1px;
+  background: rgb(245 245 247 / 20%);
+  pointer-events: none;
+}
+
+.route span {
+  position: absolute;
+  top: -2px;
+  left: 0;
+  width: min(34%, 29rem);
+  height: 5px;
+  background: var(--color-signal);
+  transform-origin: left;
+  animation: route-in 750ms 480ms var(--ease-out) both;
+}
+
+@keyframes hero-image-in {
+  from {
+    clip-path: inset(0 0 0 100%);
+  }
+}
+
+@keyframes hero-copy-in {
+  from {
+    opacity: 0;
+    transform: translateX(-1.25rem);
+  }
+}
+
+@keyframes route-in {
+  from {
+    transform: scaleX(0);
+  }
+}
+
+@media (max-width: 900px) {
+  .hero {
+    grid-template-columns: 0.9fr 1.1fr;
+  }
+
+  .title {
+    font-size: clamp(3.3rem, 8vw, 5.7rem);
+  }
+}
+
+@media (max-width: 767px) {
+  .hero {
+    min-height: auto;
+    grid-template-columns: 1fr;
+    padding-inline: 0;
+  }
+
+  .copy {
+    min-height: 31rem;
+    padding: 4.25rem var(--page-gutter) 3rem;
+  }
+
+  .location {
+    margin-bottom: 2.75rem;
+  }
+
+  .title {
+    font-size: clamp(2.75rem, 14vw, 5.25rem);
+  }
+
+  .title span {
+    white-space: nowrap;
+  }
+
+  .lead {
+    margin-top: 1.75rem;
+  }
+
+  .action {
+    width: 100%;
+    margin-top: 2.25rem;
+  }
+
+  .visual {
+    min-height: clamp(24rem, 118vw, 38rem);
+  }
+
+  .visualShade {
+    background: linear-gradient(0deg, rgb(9 9 13 / 62%) 0, transparent 42%);
+  }
+
+  .route {
+    right: var(--page-gutter);
+    bottom: -1px;
+    left: var(--page-gutter);
+  }
+
+  .route span {
+    width: 44%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .copy,
+  .visual,
+  .route span {
+    animation: none;
+  }
+
+  .image {
+    transition: none;
+  }
+
+  .visual:hover .image {
+    transform: none;
+  }
+}
