@@ -188,6 +188,26 @@
   max-width: 7rem;
 }
 
+.zoneAction {
+  min-height: 3.25rem;
+  margin-top: 2rem;
+  border: 1px solid var(--color-line);
+  padding: 0.8rem 1.1rem;
+  background: transparent;
+  color: var(--color-text);
+  cursor: pointer;
+  font: inherit;
+  font-weight: 620;
+  transition:
+    border-color 180ms ease,
+    background 180ms ease;
+}
+
+.zoneAction:hover {
+  border-color: var(--color-signal);
+  background: var(--color-signal);
+}
+
 .pricing {
   background: var(--color-surface);
 }
@@ -793,7 +813,9 @@
   }
 
   .zone:hover .zoneImage img,
-  .galleryItem:hover img {
+  .galleryItem:hover img,
+  .zoneAction {
     transform: none;
+    transition: none;
   }
 }

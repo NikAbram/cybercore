@@ -1,5 +1,6 @@
 import Image from 'next/image'
 
+import { BookingTrigger } from '@/components/booking/booking-trigger'
 import { zones } from '@/data/zones'
 
 import styles from './landing-sections.module.css'
@@ -60,6 +61,9 @@ export function Zones() {
                 от <strong className="font-display">{zone.price}</strong>
                 <span>{zone.priceUnit}</span>
               </p>
+              <BookingTrigger className={styles.zoneAction} zone={zone.id}>
+                Забронировать {zone.name}
+              </BookingTrigger>
             </div>
           </article>
         ))}

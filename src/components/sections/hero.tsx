@@ -1,6 +1,7 @@
 import Image from 'next/image'
 
 import { heroMedia } from '@/data/media'
+import { BookingTrigger } from '@/components/booking/booking-trigger'
 
 import styles from './hero.module.css'
 
@@ -17,9 +18,14 @@ export function Hero() {
           Мощные станции, честные 240+ Гц и пространство, в котором ничто не
           отвлекает от матча.
         </p>
-        <a className={styles.action} href="#pricing">
-          Смотреть тарифы
-        </a>
+        <div className={styles.actions}>
+          <BookingTrigger className={styles.action}>
+            Забронировать ПК
+          </BookingTrigger>
+          <a className={styles.actionSecondary} href="#pricing">
+            Смотреть тарифы
+          </a>
+        </div>
       </div>
 
       <div className={styles.visual}>

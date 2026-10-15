@@ -7,8 +7,11 @@ import { Hero } from '@/components/sections/hero'
 import { Pricing } from '@/components/sections/pricing'
 import { Tournaments } from '@/components/sections/tournaments'
 import { Zones } from '@/components/sections/zones'
+import { getBookingAvailability } from '@/lib/server/booking-config'
 
 export default function HomePage() {
+  const bookingAvailability = getBookingAvailability()
+
   return (
     <div id="top" className="page-shell">
       <SiteHeader />
@@ -22,6 +25,8 @@ export default function HomePage() {
         <ContactsFaq />
       </main>
       <SiteFooter />
+      <BookingDialog availability={bookingAvailability} />
     </div>
   )
 }
+import { BookingDialog } from '@/components/booking/booking-dialog'

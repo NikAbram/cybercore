@@ -168,3 +168,109 @@ test('core interactions work with reduced motion', async ({ page }) => {
   await firstQuestion.click()
   await expect(firstQuestion).toHaveAttribute('aria-expanded', 'true')
 })
+
+test('booking dialog validates, handles delivery errors and confirms accepted email', async ({
+  page,
+}) => {
+  let providerAccepts = false
+  await page.route('**/api/booking', async (route) => {
+    await new Promise((resolve) => setTimeout(resolve, 300))
+    await route.fulfill({
+      status: providerAccepts ? 200 : 503,
+      contentType: 'application/json',
+      body: JSON.stringify({
+        message: providerAccepts
+          ? 'Заявка отправлена. Мы свяжемся с вами для подтверждения бронирования.'
+          : 'Не удалось отправить заявку. Попробуйте позже.',
+      }),
+    })
+  })
+
+  await page.setViewportSize({ width: 1440, height: 900 })
+  await page.goto('/')
+
+  const bookingButton = page.getByRole('button', { name: 'Забронировать ПК' })
+  await bookingButton.click()
+
+  const dialog = page.getByRole('dialog', { name: 'Заявка на игру' })
+  await expect(dialog).toBeVisible()
+  await expect
+    .poll(() => page.evaluate(() => document.body.style.overflow))
+    .toBe('hidden')
+
+  await page.screenshot({
+    path: path.join(os.tmpdir(), 'cybercore-stage5-booking-form.png'),
+    fullPage: false,
+  })
+
+  const submitButton = dialog.locator('button[type="submit"]')
+  await submitButton.click()
+  await expect(
+    dialog.getByText(/Введите имя — минимум 2 символа/),
+  ).toBeVisible()
+  await expect(dialog.getByText(/Введите российский номер/)).toBeVisible()
+
+  const visitDate = new Date(Date.now() + 2 * 86_400_000)
+    .toISOString()
+    .slice(0, 10)
+  await dialog.getByLabel('Имя').fill('Алексей')
+  await dialog.getByLabel('Телефон').fill('8 999 123-45-67')
+  await dialog.getByLabel('Игровая зона').selectOption('vip')
+  await dialog.getByLabel('Дата').fill(visitDate)
+  await dialog.getByLabel('Время').fill('18:30')
+  await dialog.getByLabel('Продолжительность').selectOption('3')
+  await dialog.getByLabel('Количество мест').selectOption('2')
+  await dialog.getByRole('checkbox').check()
+
+  await dialog.getByRole('button', { name: 'Отправить заявку' }).click()
+  await expect(submitButton).toBeDisabled()
+  await expect(submitButton).toHaveText('Отправляем заявку…')
+  await expect(
+    dialog.getByText('Не удалось отправить заявку. Попробуйте позже.'),
+  ).toBeVisible()
+  await expect(dialog.getByText(/Заявка отправлена/)).not.toBeVisible()
+
+  providerAccepts = true
+  await dialog.getByRole('button', { name: 'Отправить заявку' }).click()
+  await expect(
+    dialog.getByText(
+      'Заявка отправлена. Мы свяжемся с вами для подтверждения бронирования.',
+    ),
+  ).toBeVisible()
+  await expect(
+    dialog.getByText('Заявка не резервирует место автоматически.'),
+  ).toBeVisible()
+
+  await page.screenshot({
+    path: path.join(os.tmpdir(), 'cybercore-stage5-booking-success.png'),
+    fullPage: false,
+  })
+
+  await dialog.getByRole('button', { name: 'Закрыть', exact: true }).click()
+  await expect(dialog).not.toBeVisible()
+  await expect(bookingButton).toBeFocused()
+  await expect
+    .poll(() => page.evaluate(() => document.body.style.overflow))
+    .toBe('')
+
+  await page.setViewportSize({ width: 375, height: 812 })
+  await bookingButton.click()
+  await expect(dialog).toBeVisible()
+  await expect
+    .poll(() =>
+      page.evaluate(() => ({
+        client: document.documentElement.clientWidth,
+        scroll: document.documentElement.scrollWidth,
+      })),
+    )
+    .toEqual({ client: 375, scroll: 375 })
+
+  await page.screenshot({
+    path: path.join(os.tmpdir(), 'cybercore-stage5-booking-mobile.png'),
+    fullPage: false,
+  })
+
+  await page.keyboard.press('Escape')
+  await expect(dialog).not.toBeVisible()
+  await expect(bookingButton).toBeFocused()
+})
