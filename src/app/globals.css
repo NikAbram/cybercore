@@ -35,6 +35,7 @@
 
 html {
   min-width: 20rem;
+  scroll-padding-top: calc(var(--header-height) + 1rem);
   scroll-behavior: smooth;
   background: var(--color-ink);
 }

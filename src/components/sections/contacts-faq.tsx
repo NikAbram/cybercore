@@ -1,8 +1,8 @@
 import { Clock3, MapPin } from 'lucide-react'
 
-import { faqItems } from '@/data/faq'
 import { site } from '@/data/site'
 
+import { FaqAccordion } from './faq-accordion'
 import styles from './landing-sections.module.css'
 
 export function ContactsFaq() {
@@ -41,14 +41,7 @@ export function ContactsFaq() {
 
       <div className={styles.faq}>
         <h2>Ответы на вопросы</h2>
-        <div>
-          {faqItems.map((item) => (
-            <details key={item.question}>
-              <summary>{item.question}</summary>
-              <p>{item.answer}</p>
-            </details>
-          ))}
-        </div>
+        <FaqAccordion />
       </div>
     </section>
   )

@@ -1,7 +1,4 @@
-import Image from 'next/image'
-
-import { galleryMedia } from '@/data/media'
-
+import { GalleryGrid } from './gallery-grid'
 import styles from './landing-sections.module.css'
 
 export function Gallery() {
@@ -19,23 +16,7 @@ export function Gallery() {
         </p>
       </header>
 
-      <div className={styles.galleryGrid}>
-        {galleryMedia.map((asset, index) => (
-          <figure className={styles.galleryItem} key={asset.src}>
-            <Image
-              src={asset.src}
-              alt={asset.alt}
-              fill
-              sizes={
-                index === 0 || index === 4
-                  ? '(max-width: 767px) 100vw, 58vw'
-                  : '(max-width: 767px) 100vw, 42vw'
-              }
-              style={{ objectPosition: asset.focalPoint }}
-            />
-          </figure>
-        ))}
-      </div>
+      <GalleryGrid />
     </section>
   )
 }

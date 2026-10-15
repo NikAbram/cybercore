@@ -192,8 +192,35 @@
   background: var(--color-surface);
 }
 
-.priceGroup + .priceGroup {
-  margin-top: clamp(4rem, 7vw, 7rem);
+.pricingTabs {
+  display: inline-grid;
+  grid-template-columns: repeat(2, minmax(8rem, 1fr));
+  margin-bottom: clamp(2.5rem, 5vw, 4rem);
+  border: 1px solid var(--color-line);
+  padding: 0.25rem;
+}
+
+.pricingTab {
+  min-height: 3rem;
+  border: 0;
+  padding: 0.5rem 1.25rem;
+  background: transparent;
+  color: var(--color-muted);
+  cursor: pointer;
+  font: inherit;
+  font-weight: 620;
+  transition:
+    background 180ms ease,
+    color 180ms ease;
+}
+
+.pricingTab[aria-selected='true'] {
+  background: var(--color-text);
+  color: var(--color-ink);
+}
+
+.pricingPanel {
+  min-height: 30rem;
 }
 
 .priceGroup h3 {
@@ -281,6 +308,26 @@
   line-height: 1.6;
 }
 
+.toastRegion {
+  position: fixed;
+  z-index: 90;
+  right: var(--page-gutter);
+  bottom: 1.5rem;
+  min-height: 3rem;
+  pointer-events: none;
+}
+
+.toast {
+  margin: 0;
+  border-left: 3px solid var(--color-signal);
+  padding: 0.9rem 1.15rem;
+  background: var(--color-text);
+  box-shadow: 0 1.25rem 4rem rgb(0 0 0 / 35%);
+  color: var(--color-ink);
+  font-size: var(--text-sm);
+  font-weight: 620;
+}
+
 .tournaments {
   display: grid;
   grid-template-columns: minmax(15rem, 0.55fr) minmax(0, 1.45fr);
@@ -355,7 +402,11 @@
   min-width: 0;
   overflow: hidden;
   margin: 0;
+  border: 0;
+  padding: 0;
   background: var(--color-surface);
+  color: inherit;
+  cursor: zoom-in;
 }
 
 .galleryItem:nth-child(1),
@@ -374,6 +425,91 @@
 .galleryItem:nth-child(3),
 .galleryItem:nth-child(6) {
   min-height: 19rem;
+}
+
+.lightbox {
+  width: 100vw;
+  max-width: none;
+  height: 100dvh;
+  max-height: none;
+  margin: 0;
+  border: 0;
+  padding: clamp(4.5rem, 7vw, 7rem) var(--page-gutter) clamp(2rem, 5vw, 4rem);
+  background: rgb(9 9 13 / 96%);
+  color: var(--color-text);
+}
+
+.lightbox::backdrop {
+  background: rgb(0 0 0 / 72%);
+}
+
+.lightboxContent {
+  display: grid;
+  width: min(82rem, 100%);
+  height: 100%;
+  grid-template: minmax(0, 1fr) auto / 1fr auto;
+  gap: 1rem 2rem;
+  margin-inline: auto;
+}
+
+.lightboxImage {
+  position: relative;
+  min-height: 0;
+  grid-column: 1 / -1;
+}
+
+.lightboxImage img {
+  object-fit: contain;
+}
+
+.lightboxCaption,
+.lightboxCounter {
+  margin: 0;
+  color: var(--color-text-soft);
+  font-size: var(--text-sm);
+}
+
+.lightboxCounter {
+  text-align: right;
+}
+
+.lightboxClose,
+.lightboxArrow {
+  position: fixed;
+  z-index: 2;
+  display: grid;
+  width: 3rem;
+  height: 3rem;
+  place-items: center;
+  border: 1px solid var(--color-line);
+  padding: 0;
+  background: rgb(23 23 31 / 88%);
+  color: var(--color-text);
+  cursor: pointer;
+}
+
+.lightboxClose {
+  top: 1.25rem;
+  right: var(--page-gutter);
+}
+
+.lightboxArrow {
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.lightboxPrevious {
+  left: var(--page-gutter);
+}
+
+.lightboxNext {
+  right: var(--page-gutter);
+}
+
+.lightboxClose svg,
+.lightboxArrow svg {
+  width: 1.25rem;
+  height: 1.25rem;
 }
 
 .contactsFaq {
@@ -434,33 +570,38 @@
   font-size: clamp(2.25rem, 1.75rem + 2vw, 4rem);
 }
 
-.faq > div {
+.faqList {
   margin-top: clamp(2.5rem, 5vw, 4.5rem);
   border-top: 1px solid var(--color-line);
 }
 
-.faq details {
+.faqItem {
   border-bottom: 1px solid var(--color-line);
 }
 
-.faq summary {
+.faqItem h3 {
+  margin: 0;
+}
+
+.faqTrigger {
   position: relative;
   display: flex;
+  width: 100%;
   min-height: 4.75rem;
   align-items: center;
+  border: 0;
   padding: 1rem 3rem 1rem 0;
+  background: transparent;
+  color: var(--color-text);
   cursor: pointer;
+  font-family: inherit;
   font-size: var(--text-md);
   font-weight: 620;
-  list-style: none;
+  text-align: left;
 }
 
-.faq summary::-webkit-details-marker {
-  display: none;
-}
-
-.faq summary::before,
-.faq summary::after {
+.faqTrigger span::before,
+.faqTrigger span::after {
   position: absolute;
   top: 50%;
   right: 0.25rem;
@@ -470,16 +611,20 @@
   content: '';
 }
 
-.faq summary::after {
+.faqTrigger span::after {
   transform: rotate(90deg);
   transition: transform 180ms ease;
 }
 
-.faq details[open] summary::after {
+.faqTrigger[aria-expanded='true'] span::after {
   transform: rotate(0);
 }
 
-.faq details p {
+.faqAnswer {
+  overflow: hidden;
+}
+
+.faqAnswer p {
   max-width: 45rem;
   margin: 0;
   padding: 0 3rem 1.75rem 0;
@@ -609,12 +754,41 @@
   .galleryItem:nth-child(5) {
     aspect-ratio: 5 / 4;
   }
+
+  .lightbox {
+    padding: 4.5rem 1rem 5.5rem;
+  }
+
+  .lightboxContent {
+    grid-template: minmax(0, 1fr) auto / 1fr auto;
+    gap: 0.75rem 1rem;
+  }
+
+  .lightboxArrow {
+    top: auto;
+    bottom: 1rem;
+    transform: none;
+  }
+
+  .lightboxPrevious {
+    left: 1rem;
+  }
+
+  .lightboxNext {
+    right: 1rem;
+  }
+
+  .lightboxClose {
+    top: 0.75rem;
+    right: 1rem;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
   .zoneImage img,
   .galleryItem img,
-  .faq summary::after {
+  .faqTrigger span::after,
+  .pricingTab {
     transition: none;
   }
 
