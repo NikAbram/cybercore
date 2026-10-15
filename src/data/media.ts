@@ -12,36 +12,6 @@ export const heroMedia = {
   status: 'draft',
 } satisfies MediaAsset
 
-export const zoneMedia = [
-  {
-    id: 'standard',
-    name: 'STANDARD',
-    description: 'Основной зал для регулярной игры',
-    src: '/images/cybercore/zone-standard.webp',
-    alt: 'Ровный ряд игровых станций в основном зале',
-    focalPoint: '58% 50%',
-    status: 'draft',
-  },
-  {
-    id: 'vip',
-    name: 'VIP',
-    description: 'Больше пространства и тише вокруг',
-    src: '/images/cybercore/zone-vip.webp',
-    alt: 'Просторная приватная игровая зона с мягким освещением',
-    focalPoint: '66% 50%',
-    status: 'draft',
-  },
-  {
-    id: 'bootcamp',
-    name: 'BOOTCAMP',
-    description: 'Изолированная комната для команды',
-    src: '/images/cybercore/zone-bootcamp.webp',
-    alt: 'Командная игровая комната за стеклянной перегородкой',
-    focalPoint: '52% 50%',
-    status: 'draft',
-  },
-] as const
-
 export const galleryMedia = [
   {
     src: '/images/cybercore/gallery-peripherals.webp',

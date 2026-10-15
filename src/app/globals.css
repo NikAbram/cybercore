@@ -80,50 +80,6 @@ summary {
   border-left: 1px solid var(--color-line);
 }
 
-.site-header {
-  display: flex;
-  min-height: var(--header-height);
-  align-items: center;
-  justify-content: space-between;
-  padding-inline: var(--page-gutter);
-  border-bottom: 1px solid var(--color-line);
-}
-
-.brand {
-  color: var(--color-text);
-  font-size: clamp(1.15rem, 1rem + 0.65vw, 1.75rem);
-  font-weight: 650;
-  letter-spacing: -0.045em;
-  text-decoration: none;
-}
-
-.header-status {
-  display: flex;
-  align-items: center;
-  gap: 0.65rem;
-  margin: 0;
-  color: var(--color-muted);
-  font-size: var(--text-sm);
-}
-
-.header-status span {
-  width: 0.5rem;
-  height: 0.5rem;
-  border-radius: 50%;
-  background: var(--color-signal);
-}
-
-@media (max-width: 480px) {
-  .header-status {
-    font-size: 0;
-  }
-
-  .header-status span {
-    width: 0.625rem;
-    height: 0.625rem;
-  }
-}
-
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;

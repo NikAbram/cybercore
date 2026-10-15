@@ -1,27 +1,27 @@
-import Link from 'next/link'
-
+import { SiteFooter } from '@/components/layout/site-footer'
+import { SiteHeader } from '@/components/layout/site-header'
+import { Advantages } from '@/components/sections/advantages'
+import { ContactsFaq } from '@/components/sections/contacts-faq'
+import { Gallery } from '@/components/sections/gallery'
 import { Hero } from '@/components/sections/hero'
-import { ZonesPreview } from '@/components/sections/zones-preview'
+import { Pricing } from '@/components/sections/pricing'
+import { Tournaments } from '@/components/sections/tournaments'
+import { Zones } from '@/components/sections/zones'
 
 export default function HomePage() {
   return (
-    <div className="page-shell">
-      <header className="site-header">
-        <Link
-          className="brand font-display"
-          href="/"
-          aria-label="CYBERCORE — главная"
-        >
-          CYBERCORE
-        </Link>
-        <p className="header-status">
-          <span aria-hidden="true" /> Игровое пространство
-        </p>
-      </header>
+    <div id="top" className="page-shell">
+      <SiteHeader />
       <main>
         <Hero />
-        <ZonesPreview />
+        <Advantages />
+        <Zones />
+        <Pricing />
+        <Tournaments />
+        <Gallery />
+        <ContactsFaq />
       </main>
+      <SiteFooter />
     </div>
   )
 }

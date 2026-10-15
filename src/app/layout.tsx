@@ -17,8 +17,16 @@ const spaceGrotesk = Space_Grotesk({
 })
 
 export const metadata: Metadata = {
-  title: 'CYBERCORE',
-  description: 'Игровые зоны CYBERCORE для одиночной игры и командных сессий.',
+  title: 'CYBERCORE — компьютерный клуб в Самаре',
+  description:
+    'Игровые зоны CYBERCORE для одиночной игры, встреч с друзьями и командных сессий.',
+  openGraph: {
+    title: 'CYBERCORE — пространство для игры',
+    description:
+      'Мощные станции, мониторы от 240 Гц и игровые зоны разного уровня приватности.',
+    locale: 'ru_RU',
+    type: 'website',
+  },
 }
 
 export default function RootLayout({

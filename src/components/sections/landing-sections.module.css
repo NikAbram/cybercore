@@ -1,0 +1,625 @@
+.section {
+  padding: var(--section-space) var(--page-gutter);
+  scroll-margin-top: var(--header-height);
+}
+
+.sectionHeading {
+  display: grid;
+  grid-template-columns: minmax(0, 1.25fr) minmax(18rem, 0.75fr);
+  gap: var(--grid-gap);
+  align-items: end;
+  margin-bottom: clamp(3.5rem, 7vw, 7rem);
+}
+
+.sectionHeading h2,
+.contacts h2,
+.faq h2 {
+  max-width: 54rem;
+  margin: 0;
+  font-size: var(--text-section);
+  font-weight: 720;
+  letter-spacing: -0.055em;
+  line-height: 0.96;
+}
+
+.sectionHeading > p {
+  max-width: 34rem;
+  margin: 0;
+  color: var(--color-muted);
+  font-size: var(--text-md);
+  line-height: 1.65;
+}
+
+.advantages {
+  padding-inline: var(--page-gutter);
+  background: var(--color-surface);
+}
+
+.advantages ul {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.advantages li {
+  display: grid;
+  min-width: 0;
+  grid-template-columns: auto 1fr;
+  gap: 1rem;
+  padding: clamp(2rem, 4vw, 3.75rem) clamp(1rem, 2vw, 2rem);
+  border-left: 1px solid var(--color-line);
+}
+
+.advantages li:first-child {
+  padding-left: 0;
+  border-left: 0;
+}
+
+.advantages svg {
+  width: 1.35rem;
+  height: 1.35rem;
+  color: var(--color-signal);
+}
+
+.advantages h2,
+.advantages p {
+  margin: 0;
+}
+
+.advantages h2 {
+  font-size: var(--text-md);
+  font-weight: 650;
+}
+
+.advantages p {
+  margin-top: 0.75rem;
+  color: var(--color-muted);
+  font-size: var(--text-sm);
+  line-height: 1.55;
+}
+
+.zoneList {
+  display: grid;
+  gap: clamp(5rem, 10vw, 10rem);
+}
+
+.zone {
+  display: grid;
+  grid-template-columns: minmax(0, 1.18fr) minmax(20rem, 0.82fr);
+  gap: clamp(2rem, 7vw, 8rem);
+  align-items: center;
+}
+
+.zone:nth-child(even) .zoneImage {
+  grid-column: 2;
+}
+
+.zone:nth-child(even) .zoneContent {
+  grid-row: 1;
+  grid-column: 1;
+}
+
+.zoneImage {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  background: var(--color-surface);
+}
+
+.zoneImage img,
+.galleryItem img {
+  object-fit: cover;
+  filter: saturate(0.88);
+  transition:
+    transform 650ms var(--ease-out),
+    filter 240ms ease;
+}
+
+.zone:hover .zoneImage img,
+.galleryItem:hover img {
+  transform: scale(1.025);
+  filter: saturate(1);
+}
+
+.zoneContent {
+  min-width: 0;
+}
+
+.zoneName {
+  margin: 0 0 1.2rem;
+  color: var(--color-signal);
+  font-size: var(--text-md);
+  font-weight: 600;
+  letter-spacing: -0.025em;
+}
+
+.zoneContent h3 {
+  max-width: 34rem;
+  margin: 0;
+  font-size: clamp(2rem, 1.4rem + 2.1vw, 4rem);
+  font-weight: 680;
+  letter-spacing: -0.05em;
+  line-height: 1;
+}
+
+.specifications {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  margin: clamp(2.5rem, 5vw, 4.5rem) 0 0;
+  border-top: 1px solid var(--color-line);
+}
+
+.specifications div {
+  min-width: 0;
+  padding: 1.15rem 1rem 1.15rem 0;
+  border-bottom: 1px solid var(--color-line);
+}
+
+.specifications dt {
+  color: var(--color-muted);
+  font-size: var(--text-sm);
+}
+
+.specifications dd {
+  margin: 0.45rem 0 0;
+  overflow-wrap: anywhere;
+  font-size: var(--text-md);
+}
+
+.zonePrice {
+  display: flex;
+  align-items: baseline;
+  gap: 0.75rem;
+  margin: 2rem 0 0;
+  color: var(--color-muted);
+  font-size: var(--text-sm);
+}
+
+.zonePrice strong {
+  color: var(--color-text);
+  font-size: clamp(2.4rem, 1.9rem + 2vw, 4.25rem);
+  font-weight: 600;
+  letter-spacing: -0.055em;
+}
+
+.zonePrice span {
+  max-width: 7rem;
+}
+
+.pricing {
+  background: var(--color-surface);
+}
+
+.priceGroup + .priceGroup {
+  margin-top: clamp(4rem, 7vw, 7rem);
+}
+
+.priceGroup h3 {
+  margin: 0 0 1.5rem;
+  font-size: var(--text-xl);
+  font-weight: 650;
+  letter-spacing: -0.035em;
+}
+
+.priceHeader,
+.priceRow,
+.priceRowPopular {
+  display: grid;
+  grid-template-columns: minmax(17rem, 1.2fr) repeat(2, minmax(9rem, 0.7fr));
+  gap: var(--grid-gap);
+  align-items: center;
+}
+
+.priceHeader {
+  padding: 0 1.5rem 0.8rem;
+  color: var(--color-muted);
+  font-size: var(--text-sm);
+}
+
+.priceRow,
+.priceRowPopular {
+  position: relative;
+  min-height: 8rem;
+  padding: 1.5rem;
+  border-top: 1px solid var(--color-line);
+}
+
+.priceRowPopular {
+  background: var(--color-surface-strong);
+  border-top-color: var(--color-signal);
+}
+
+.priceName h4,
+.priceName p,
+.priceValue {
+  margin: 0;
+}
+
+.priceName h4 {
+  font-size: var(--text-lg);
+  font-weight: 650;
+}
+
+.priceName p {
+  max-width: 31rem;
+  margin-top: 0.4rem;
+  color: var(--color-muted);
+  font-size: var(--text-sm);
+}
+
+.priceName > span {
+  display: inline-flex;
+  margin-top: 0.8rem;
+  border-left: 2px solid var(--color-signal);
+  padding-left: 0.65rem;
+  color: var(--color-text-soft);
+  font-size: var(--text-sm);
+}
+
+.priceValue {
+  font-size: clamp(1.45rem, 1.16rem + 1vw, 2.25rem);
+  font-weight: 550;
+  letter-spacing: -0.045em;
+}
+
+.mobileZone {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+.pricingNote {
+  max-width: 48rem;
+  margin: 2rem 0 0;
+  color: var(--color-muted);
+  font-size: var(--text-sm);
+  line-height: 1.6;
+}
+
+.tournaments {
+  display: grid;
+  grid-template-columns: minmax(15rem, 0.55fr) minmax(0, 1.45fr);
+  gap: clamp(2.5rem, 8vw, 9rem);
+  align-items: stretch;
+  padding: var(--section-space) var(--page-gutter);
+  scroll-margin-top: var(--header-height);
+}
+
+.tournaments > header h2,
+.tournaments > header p {
+  margin: 0;
+}
+
+.tournaments > header h2 {
+  font-size: var(--text-section);
+  letter-spacing: -0.055em;
+  line-height: 0.96;
+}
+
+.tournaments > header p {
+  max-width: 24rem;
+  margin-top: 1.5rem;
+  color: var(--color-muted);
+  line-height: 1.6;
+}
+
+.tournamentEmpty {
+  display: grid;
+  min-height: 25rem;
+  place-content: center;
+  border: 1px solid var(--color-line);
+  padding: clamp(2rem, 6vw, 6rem);
+  text-align: center;
+}
+
+.tournamentEmpty > p:first-child {
+  margin: 0;
+  color: var(--color-signal);
+  font-size: var(--text-sm);
+  letter-spacing: 0.04em;
+}
+
+.tournamentEmpty h3 {
+  margin: 1.2rem 0 0;
+  font-size: clamp(2rem, 1.55rem + 1.8vw, 3.75rem);
+  letter-spacing: -0.045em;
+}
+
+.tournamentEmpty > p:last-child {
+  max-width: 38rem;
+  margin: 1.25rem auto 0;
+  color: var(--color-muted);
+  font-size: var(--text-md);
+  line-height: 1.6;
+}
+
+.tournamentList {
+  display: grid;
+  gap: var(--grid-gap);
+}
+
+.galleryGrid {
+  display: grid;
+  grid-auto-rows: minmax(15rem, 28vw);
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: var(--grid-gap);
+}
+
+.galleryItem {
+  position: relative;
+  min-width: 0;
+  overflow: hidden;
+  margin: 0;
+  background: var(--color-surface);
+}
+
+.galleryItem:nth-child(1),
+.galleryItem:nth-child(4),
+.galleryItem:nth-child(5) {
+  grid-column: span 7;
+}
+
+.galleryItem:nth-child(2),
+.galleryItem:nth-child(3),
+.galleryItem:nth-child(6) {
+  grid-column: span 5;
+}
+
+.galleryItem:nth-child(2),
+.galleryItem:nth-child(3),
+.galleryItem:nth-child(6) {
+  min-height: 19rem;
+}
+
+.contactsFaq {
+  display: grid;
+  grid-template-columns: minmax(0, 0.82fr) minmax(22rem, 1.18fr);
+  gap: clamp(4rem, 10vw, 11rem);
+  background: var(--color-surface);
+}
+
+.contactsLead {
+  max-width: 35rem;
+  margin: 2rem 0 0;
+  color: var(--color-text-soft);
+  font-size: var(--text-lg);
+  line-height: 1.6;
+}
+
+.contactDetails {
+  display: grid;
+  margin: clamp(3rem, 6vw, 5rem) 0 0;
+  border-top: 1px solid var(--color-line);
+}
+
+.contactDetails > div {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0.3rem 1rem;
+  padding-block: 1.5rem;
+  border-bottom: 1px solid var(--color-line);
+}
+
+.contactDetails svg {
+  width: 1.4rem;
+  height: 1.4rem;
+  grid-row: 1 / span 2;
+  color: var(--color-signal);
+}
+
+.contactDetails dt {
+  color: var(--color-muted);
+  font-size: var(--text-sm);
+}
+
+.contactDetails dd {
+  margin: 0.35rem 0 0;
+  font-size: var(--text-lg);
+}
+
+.contactNote {
+  max-width: 30rem;
+  margin: 2rem 0 0;
+  color: var(--color-muted);
+  font-size: var(--text-sm);
+  line-height: 1.6;
+}
+
+.faq h2 {
+  font-size: clamp(2.25rem, 1.75rem + 2vw, 4rem);
+}
+
+.faq > div {
+  margin-top: clamp(2.5rem, 5vw, 4.5rem);
+  border-top: 1px solid var(--color-line);
+}
+
+.faq details {
+  border-bottom: 1px solid var(--color-line);
+}
+
+.faq summary {
+  position: relative;
+  display: flex;
+  min-height: 4.75rem;
+  align-items: center;
+  padding: 1rem 3rem 1rem 0;
+  cursor: pointer;
+  font-size: var(--text-md);
+  font-weight: 620;
+  list-style: none;
+}
+
+.faq summary::-webkit-details-marker {
+  display: none;
+}
+
+.faq summary::before,
+.faq summary::after {
+  position: absolute;
+  top: 50%;
+  right: 0.25rem;
+  width: 1rem;
+  height: 1px;
+  background: var(--color-signal);
+  content: '';
+}
+
+.faq summary::after {
+  transform: rotate(90deg);
+  transition: transform 180ms ease;
+}
+
+.faq details[open] summary::after {
+  transform: rotate(0);
+}
+
+.faq details p {
+  max-width: 45rem;
+  margin: 0;
+  padding: 0 3rem 1.75rem 0;
+  color: var(--color-muted);
+  line-height: 1.65;
+}
+
+@media (max-width: 1000px) {
+  .advantages ul {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .advantages li:nth-child(3) {
+    padding-left: 0;
+    border-left: 0;
+    border-top: 1px solid var(--color-line);
+  }
+
+  .advantages li:nth-child(4) {
+    border-top: 1px solid var(--color-line);
+  }
+
+  .zone {
+    grid-template-columns: minmax(0, 1fr) minmax(18rem, 0.9fr);
+    gap: 2.5rem;
+  }
+}
+
+@media (max-width: 767px) {
+  .sectionHeading,
+  .tournaments,
+  .contactsFaq {
+    grid-template-columns: 1fr;
+  }
+
+  .sectionHeading {
+    margin-bottom: 3.25rem;
+  }
+
+  .advantages ul {
+    grid-template-columns: 1fr;
+  }
+
+  .advantages li,
+  .advantages li:first-child,
+  .advantages li:nth-child(3) {
+    padding: 1.75rem 0;
+    border-top: 1px solid var(--color-line);
+    border-left: 0;
+  }
+
+  .advantages li:first-child {
+    border-top: 0;
+  }
+
+  .zone,
+  .zone:nth-child(even) {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .zone:nth-child(even) .zoneImage,
+  .zone:nth-child(even) .zoneContent {
+    grid-row: auto;
+    grid-column: auto;
+  }
+
+  .zoneImage {
+    aspect-ratio: 4 / 3;
+  }
+
+  .priceHeader {
+    display: none;
+  }
+
+  .priceRow,
+  .priceRowPopular {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.5rem 1rem;
+    padding: 1.5rem 0;
+  }
+
+  .priceRowPopular {
+    margin-inline: calc(var(--page-gutter) * -1);
+    padding-inline: var(--page-gutter);
+  }
+
+  .priceName {
+    grid-column: 1 / -1;
+  }
+
+  .priceValue {
+    display: flex;
+    min-width: 0;
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+
+  .mobileZone {
+    position: static;
+    width: auto;
+    height: auto;
+    overflow: visible;
+    clip: auto;
+    color: var(--color-muted);
+    font-size: 0.6875rem;
+    letter-spacing: 0;
+  }
+
+  .tournamentEmpty {
+    min-height: 21rem;
+  }
+
+  .galleryGrid {
+    grid-auto-rows: auto;
+    grid-template-columns: 1fr;
+  }
+
+  .galleryItem,
+  .galleryItem:nth-child(n) {
+    min-height: 0;
+    aspect-ratio: 4 / 3;
+    grid-column: auto;
+  }
+
+  .galleryItem:nth-child(1),
+  .galleryItem:nth-child(5) {
+    aspect-ratio: 5 / 4;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .zoneImage img,
+  .galleryItem img,
+  .faq summary::after {
+    transition: none;
+  }
+
+  .zone:hover .zoneImage img,
+  .galleryItem:hover img {
+    transform: none;
+  }
+}

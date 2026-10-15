@@ -17,8 +17,8 @@ export function Hero() {
           Мощные станции, честные 240+ Гц и пространство, в котором ничто не
           отвлекает от матча.
         </p>
-        <a className={styles.action} href="#zones">
-          Смотреть игровые зоны
+        <a className={styles.action} href="#pricing">
+          Смотреть тарифы
         </a>
       </div>
 
