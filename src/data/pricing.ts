@@ -1,10 +1,14 @@
+import type { ContentStatus } from './site'
+
+type PublishableStatus = Exclude<ContentStatus, 'missing'>
+
 export type PriceOption = {
   name: string
   standard: string
   vip: string
   period: string
   popular?: boolean
-  status: 'draft'
+  status: PublishableStatus
 }
 
 export const hourlyPricing = [

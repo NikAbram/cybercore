@@ -1,8 +1,12 @@
+import type { ContentStatus } from './site'
+
+type PublishableStatus = Exclude<ContentStatus, 'missing'>
+
 export type MediaAsset = {
   src: string
   alt: string
   focalPoint: string
-  status: 'draft'
+  status: PublishableStatus
 }
 
 export const heroMedia = {

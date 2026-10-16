@@ -1,3 +1,7 @@
+import type { ContentStatus } from './site'
+
+type PublishableStatus = Exclude<ContentStatus, 'missing'>
+
 export type Zone = {
   id: 'standard' | 'vip' | 'bootcamp'
   name: 'STANDARD' | 'VIP' | 'BOOTCAMP'
@@ -13,9 +17,9 @@ export type Zone = {
     src: string
     alt: string
     focalPoint: string
-    status: 'draft'
+    status: PublishableStatus
   }
-  status: 'draft'
+  status: PublishableStatus
 }
 
 export const zones = [

@@ -70,6 +70,10 @@ test('desktop journey: navigation, pricing, FAQ and gallery', async ({
     page.getByRole('heading', { name: 'Твоя игра. Твои правила.' }),
   ).toBeVisible()
 
+  const developerCredit = page.getByRole('link', { name: 'Abramov.Dev' })
+  await expect(developerCredit).toHaveAttribute('href', 'https://abramov.dev')
+  await expect(developerCredit).toHaveAttribute('target', '_blank')
+
   const navigation = page.getByRole('navigation', {
     name: 'Основная навигация',
   })

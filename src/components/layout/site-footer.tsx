@@ -24,6 +24,17 @@ export function SiteFooter() {
         <p>{site.city.value}</p>
         <p>{site.hours.value}</p>
         <p>© 2026 CYBERCORE</p>
+        <p className={styles.developerCredit}>
+          Сайт разработан{' '}
+          <a
+            className="font-display"
+            href="https://abramov.dev"
+            rel="noopener noreferrer"
+            target="_blank"
+          >
+            Abramov.Dev
+          </a>
+        </p>
       </div>
     </footer>
   )

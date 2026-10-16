@@ -155,6 +155,17 @@
   margin: 0 0 0.65rem;
 }
 
+.footerMeta .developerCredit {
+  margin-top: 1.15rem;
+  color: var(--color-muted);
+}
+
+.developerCredit a {
+  color: var(--color-text-soft);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
 @media (max-width: 900px) {
   .header {
     grid-template-columns: 1fr auto;
