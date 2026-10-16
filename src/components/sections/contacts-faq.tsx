@@ -10,7 +10,7 @@ export function ContactsFaq() {
     <section
       id="contacts"
       className={`${styles.section} ${styles.contactsFaq}`}
-      aria-labelledby="contacts-title"
+      aria-labelledby="contacts-title faq-title"
     >
       <div className={styles.contacts}>
         <h2 id="contacts-title">Встретимся в игре</h2>
@@ -40,7 +40,7 @@ export function ContactsFaq() {
       </div>
 
       <div className={styles.faq}>
-        <h2>Ответы на вопросы</h2>
+        <h2 id="faq-title">Ответы на вопросы</h2>
         <FaqAccordion />
       </div>
     </section>

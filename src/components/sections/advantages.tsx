@@ -8,7 +8,14 @@ const icons = [Cpu, Gauge, Headphones, Armchair] as const
 
 export function Advantages() {
   return (
-    <section className={styles.advantages} aria-label="Преимущества клуба">
+    <section
+      id="advantages"
+      className={styles.advantages}
+      aria-labelledby="advantages-title"
+    >
+      <h2 id="advantages-title" className="sr-only">
+        Преимущества клуба
+      </h2>
       <ul>
         {advantages.map((advantage, index) => {
           const Icon = icons[index]
@@ -17,7 +24,7 @@ export function Advantages() {
             <li key={advantage.title}>
               <Icon aria-hidden="true" strokeWidth={1.5} />
               <div>
-                <h2>{advantage.title}</h2>
+                <h3>{advantage.title}</h3>
                 <p>{advantage.description}</p>
               </div>
             </li>

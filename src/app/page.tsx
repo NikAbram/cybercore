@@ -8,14 +8,18 @@ import { Pricing } from '@/components/sections/pricing'
 import { Tournaments } from '@/components/sections/tournaments'
 import { Zones } from '@/components/sections/zones'
 import { getBookingAvailability } from '@/lib/server/booking-config'
+import { BookingDialog } from '@/components/booking/booking-dialog'
 
 export default function HomePage() {
   const bookingAvailability = getBookingAvailability()
 
   return (
     <div id="top" className="page-shell">
+      <a className="skip-link" href="#main-content">
+        Перейти к содержанию
+      </a>
       <SiteHeader />
-      <main>
+      <main id="main-content">
         <Hero />
         <Advantages />
         <Zones />
@@ -29,4 +33,3 @@ export default function HomePage() {
     </div>
   )
 }
-import { BookingDialog } from '@/components/booking/booking-dialog'

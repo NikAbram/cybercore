@@ -4,7 +4,11 @@ import styles from './landing-sections.module.css'
 
 export function Tournaments() {
   return (
-    <section className={styles.tournaments} aria-labelledby="tournaments-title">
+    <section
+      id="tournaments"
+      className={styles.tournaments}
+      aria-labelledby="tournaments-title"
+    >
       <header>
         <h2 id="tournaments-title">Турниры</h2>
         <p>Матчи, командные встречи и открытые сетки клуба.</p>

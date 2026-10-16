@@ -63,12 +63,12 @@
   color: var(--color-signal);
 }
 
-.advantages h2,
+.advantages h3,
 .advantages p {
   margin: 0;
 }
 
-.advantages h2 {
+.advantages h3 {
   font-size: var(--text-md);
   font-weight: 650;
 }
@@ -206,6 +206,7 @@
 .zoneAction:hover {
   border-color: var(--color-signal);
   background: var(--color-signal);
+  color: var(--color-ink);
 }
 
 .pricing {

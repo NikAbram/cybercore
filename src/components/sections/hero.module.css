@@ -74,6 +74,7 @@
 
 .action {
   background: var(--color-signal);
+  color: var(--color-ink);
 }
 
 .actionSecondary {
@@ -85,6 +86,7 @@
 .actionSecondary:hover {
   border-color: var(--color-signal-active);
   background: var(--color-signal-active);
+  color: var(--color-ink);
 }
 
 .visual {

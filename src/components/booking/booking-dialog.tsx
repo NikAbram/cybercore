@@ -155,6 +155,7 @@ export function BookingDialog({
       ref={dialogRef}
       className={styles.dialog}
       aria-labelledby="booking-dialog-title"
+      aria-describedby="booking-dialog-description"
       onClose={handleClose}
       onCancel={(event) => {
         event.preventDefault()
@@ -177,7 +178,7 @@ export function BookingDialog({
         <header className={styles.heading}>
           <p className={`${styles.marker} font-display`}>CYBERCORE / REQUEST</p>
           <h2 id="booking-dialog-title">Заявка на игру</h2>
-          <p>
+          <p id="booking-dialog-description">
             Укажите желаемое время. Администратор свяжется с вами и отдельно
             подтвердит доступность мест.
           </p>
@@ -332,13 +333,22 @@ export function BookingDialog({
 
             <div className={`${styles.consent} ${styles.fieldWide}`}>
               <label>
-                <input type="checkbox" {...register('consent')} />
+                <input
+                  type="checkbox"
+                  aria-invalid={Boolean(errors.consent)}
+                  aria-describedby={
+                    errors.consent ? 'booking-consent-error' : undefined
+                  }
+                  {...register('consent')}
+                />
                 <span>
                   Я согласен на обработку данных в соответствии с{' '}
                   <a href={availability.privacyUrl ?? undefined}>политикой</a>.
                 </span>
               </label>
-              <FieldError message={errors.consent?.message} />
+              <span id="booking-consent-error">
+                <FieldError message={errors.consent?.message} />
+              </span>
             </div>
 
             {submission.type === 'error' ? (

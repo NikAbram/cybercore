@@ -38,6 +38,17 @@ function bookingRequest(body: unknown) {
   })
 }
 
+function rawBookingRequest(body: string, contentType = 'application/json') {
+  return new Request('http://localhost:3000/api/booking', {
+    method: 'POST',
+    headers: {
+      'Content-Type': contentType,
+      Origin: 'http://localhost:3000',
+    },
+    body,
+  })
+}
+
 describe('POST /api/booking', () => {
   beforeEach(() => {
     vi.clearAllMocks()
@@ -73,6 +84,27 @@ describe('POST /api/booking', () => {
     )
 
     expect(response.status).toBe(400)
+    expect(sendBookingEmail).not.toHaveBeenCalled()
+  })
+
+  it('rejects unsupported and malformed request bodies', async () => {
+    const unsupported = await POST(
+      rawBookingRequest('name=Alex', 'application/x-www-form-urlencoded'),
+    )
+    const malformed = await POST(rawBookingRequest('{'))
+
+    expect(unsupported.status).toBe(415)
+    expect(malformed.status).toBe(400)
+    expect(sendBookingEmail).not.toHaveBeenCalled()
+  })
+
+  it('rejects oversized request bodies', async () => {
+    const request = rawBookingRequest(
+      JSON.stringify({ value: 'x'.repeat(9000) }),
+    )
+    const response = await POST(request)
+
+    expect(response.status).toBe(413)
     expect(sendBookingEmail).not.toHaveBeenCalled()
   })
 

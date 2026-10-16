@@ -3,6 +3,55 @@ import path from 'node:path'
 
 import { expect, test } from '@playwright/test'
 
+test('SEO, accessibility and response security baseline', async ({
+  page,
+  request,
+}) => {
+  const response = await page.goto('/')
+  expect(response).not.toBeNull()
+
+  const headers = response!.headers()
+  expect(headers['content-security-policy']).toContain("default-src 'self'")
+  expect(headers['content-security-policy']).toContain("frame-ancestors 'none'")
+  expect(headers['x-content-type-options']).toBe('nosniff')
+  expect(headers['x-frame-options']).toBe('DENY')
+  expect(headers['referrer-policy']).toBe('strict-origin-when-cross-origin')
+
+  await expect(page.locator('h1')).toHaveCount(1)
+  await expect(page.locator('meta[name="description"]')).toHaveAttribute(
+    'content',
+    /Игровые зоны CYBERCORE/,
+  )
+  await expect(page.locator('meta[name="robots"]')).toHaveAttribute(
+    'content',
+    /noindex/,
+  )
+  await expect(page.locator('meta[property="og:title"]')).toHaveAttribute(
+    'content',
+    'CYBERCORE — пространство для игры',
+  )
+  await expect(page.locator('link[rel="icon"]')).toHaveCount(1)
+  await expect(page.locator('img:not([alt])')).toHaveCount(0)
+
+  await page.keyboard.press('Tab')
+  const skipLink = page.getByRole('link', { name: 'Перейти к содержанию' })
+  await expect(skipLink).toBeFocused()
+  await skipLink.press('Enter')
+  await expect(page).toHaveURL(/#main-content$/)
+
+  const robotsResponse = await request.get('/robots.txt')
+  expect(robotsResponse.ok()).toBe(true)
+  expect(await robotsResponse.text()).toContain('Disallow: /')
+
+  const sitemapResponse = await request.get('/sitemap.xml')
+  expect(sitemapResponse.ok()).toBe(true)
+  expect(await sitemapResponse.text()).toContain('<urlset')
+
+  const socialImageResponse = await request.get('/opengraph-image')
+  expect(socialImageResponse.ok()).toBe(true)
+  expect(socialImageResponse.headers()['content-type']).toContain('image/png')
+})
+
 test('desktop journey: navigation, pricing, FAQ and gallery', async ({
   page,
 }) => {

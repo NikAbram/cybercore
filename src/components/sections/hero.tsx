@@ -33,7 +33,8 @@ export function Hero() {
           src={heroMedia.src}
           alt={heroMedia.alt}
           fill
-          preload
+          loading="eager"
+          fetchPriority="high"
           sizes="(max-width: 767px) 100vw, (max-width: 1199px) 58vw, 56vw"
           style={{ objectPosition: heroMedia.focalPoint }}
           className={styles.image}

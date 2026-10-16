@@ -109,6 +109,7 @@ export function GalleryGrid() {
         ref={dialogRef}
         className={styles.lightbox}
         aria-label="Просмотр галереи"
+        aria-describedby="gallery-dialog-help"
         onCancel={(event) => {
           event.preventDefault()
           closeLightbox()
@@ -117,6 +118,10 @@ export function GalleryGrid() {
           if (event.target === event.currentTarget) closeLightbox()
         }}
       >
+        <p id="gallery-dialog-help" className="sr-only">
+          Используйте стрелки влево и вправо для перехода между изображениями,
+          Escape — для закрытия.
+        </p>
         {selectedAsset && selectedIndex !== null ? (
           <motion.div
             className={styles.lightboxContent}
